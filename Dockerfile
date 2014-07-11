@@ -1,8 +1,11 @@
 FROM ubuntu:precise
 
-RUN apt-get install -y perl
+RUN useradd postfix
+RUN addgroup postdrop
 
 ADD test /test
+
+VOLUME /vol
 
 CMD ["/test"]
 

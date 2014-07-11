@@ -1,0 +1,22 @@
+#!/bin/bash -ex
+
+touch /test_file
+touch /vol/test_file
+chmod 755 /vol/test_file /test_file
+chown postfix /vol/test_file /test_file
+chgrp postdrop /vol/test_file /test_file
+echo "Before sgid"
+ls -l /vol/test_file /test_file
+chmod g+s /vol/test_file /test_file
+echo "After sgid"
+ls -l /vol/test_file /test_file
+
+chown root:root /vol/test_file /test_file
+chmod u=rwx,g=rxs,o= /vol/test_file /test_file
+echo "Suggested workaround before chown"
+ls -l /vol/test_file /test_file
+
+chown postfix:postdrop /vol/test_file /test_file
+echo "After suggested workaround"
+ls -l /vol/test_file /test_file
+
